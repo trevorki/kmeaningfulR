@@ -27,10 +27,10 @@ install.packages("kmeaningfulR")
 ## KmeaningfulR’s Place in the R Ecosystem
 
 There already exist several packages that implement k-means clustering
-in R. Most notably there is the stats::kmeans implementation. There are
-also several functions for modified versions of k-means available in the
-ClusterR package. We are not trying to break new ground with
-kmeaningfulR, but rather to build a simple and lightweight
+in R. Most notably there is the `stats::kmeans` implementation. There
+are also several functions for modified versions of k-means available in
+the `ClusterR` package. We are not trying to break new ground with
+`kmeaningfulR`, but rather to build a simple and lightweight
 implementation from scratch.
 
 ## Features
