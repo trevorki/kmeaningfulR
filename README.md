@@ -4,7 +4,6 @@
 # KmeaningfulR
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
 Have you ever encountered a dataset that seems to have different
@@ -27,7 +26,12 @@ install.packages("kmeaningfulR")
 
 ## KmeaningfulR’s Place in the R Ecosystem
 
-TODO
+There already exist several packages that implement k-means clustering
+in R. Most notably there is the stats::kmeans implementation. There are
+also several functions for modified versions of k-means available in the
+ClusterR package. We are not trying to break new ground with
+kmeaningfulR, but rather to build a simple and lightweight
+implementation from scratch.
 
 ## Features
 
@@ -37,15 +41,15 @@ TODO
     number of clusters, `k`
 3.  `fit_assign(X, k)` - Wrapper function that calls `fit(X, k)` and
     `assign(X, centres)`
-      - `fit(X, k)` - finds centroid location for all of the `k`
+    -   `fit(X, k)` - finds centroid location for all of the `k`
         clusters
-      - `assign(X, centres)` - assigns each example to a cluster
+    -   `assign(X, centres)` - assigns each example to a cluster
 4.  `show_clusters(X, centres)` - Visualize clusters according to 2d PCA
     representation
 
 ## Dependencies
 
-  - R 4.0.3
+-   R 4.0.3
 
 ## Usage
 
@@ -54,7 +58,7 @@ library(kmeaningfulR)
 ```
 
 | Task                               | Function                    |
-| ---------------------------------- | --------------------------- |
+|------------------------------------|-----------------------------|
 | Scale numerical features           | `preprocess(df)`            |
 | Find list of centroid points       | `fit(df, 3)`                |
 | Assign new data point to cluster   | `assign(df, array2d)`       |
@@ -70,10 +74,10 @@ The official documentation is hosted on Read the Docs:
 
 This project was created by DSCI 524 Group 16:
 
-  - Yihong (Hazel) Jiang
-  - Mike Lynch
-  - Trevor Kinsey
-  - Sasha Babicki
+-   Yihong (Hazel) Jiang
+-   Mike Lynch
+-   Trevor Kinsey
+-   Sasha Babicki
 
 We welcome and recognize all contributions. You can see a list of
 current contributors in the [contributors
