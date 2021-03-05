@@ -10,14 +10,14 @@ Authors@R:
              family = "Babicki",
              role = c("aut"),
              email = "sbabicki@student.ubc.ca"),
+      person(given = "Mike",
+             family = "Lynch",
+             role = c("aut"),
+             email = "def fit_assign(X, k)"),
       person(given = "Hazel",
              family = "Jiang",
              role = c("aut"),
-             email = ""),
-      person(given = "Sasha",
-             family = "Babicki",
-             role = c("aut"),
-             email = "")
+             email = ""))
     
 Description: Uses the K-means algorithm to group similar data into clusters. Includes functions to preprocess and visualize the data.
 License: MIT + file LICENSE
