@@ -2,11 +2,23 @@ Package: kmeaningfulR
 Title: Performs Kmeans Clustering
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Trevor",
-           family = "Kinsey",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+    c(person(given = "Trevor",
+             family = "Kinsey",
+             role = c("aut", "cre"),
+             email = "trevor_kinsey@hotmail.com"),
+      person(given = "Sasha",
+             family = "Babicki",
+             role = c("aut"),
+             email = "sbabicki@student.ubc.ca"),
+      person(given = "Hazel",
+             family = "Jiang",
+             role = c("aut"),
+             email = ""),
+      person(given = "Sasha",
+             family = "Babicki",
+             role = c("aut"),
+             email = "")
+    
 Description: Uses the K-means algorithm to group similar data into clusters. Includes functions to preprocess and visualize the data.
 License: MIT + file LICENSE
 Encoding: UTF-8
