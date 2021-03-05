@@ -1,13 +1,20 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# kmeaningfulR
+# KmeaningfulR
 
 <!-- badges: start -->
 
 <!-- badges: end -->
 
-The goal of kmeaningfulR is to …
+Have you ever encountered a dataset that seems to have different
+patterns in it? Have you ever tried to group similar things together in
+a dataset and to assign a new sample based on your findings?
+
+We created `kmeaningfulR` to help solve such problems. `kmeaningfulR` is
+a R package that uses the k-means algorithm to find clusters and assign
+new data points to them. It also contains functions to help with data
+preprocessing, hyperparameter tuning and visualizing clusters.
 
 ## Installation
 
@@ -18,35 +25,56 @@ You can install the released version of kmeaningfulR from
 install.packages("kmeaningfulR")
 ```
 
-## Example
+## KmeaningfulR’s Place in the R Ecosystem
 
-This is a basic example which shows you how to solve a common problem:
+TODO
+
+## Features
+
+1.  `preprocess(X)` - Automatic dataset preprocessing: scales numerical
+    features
+2.  `find_elbow(X)` - Automatic hyperparameter tuning to select optimal
+    number of clusters, `k`
+3.  `fit_assign(X, k)` - Wrapper function that calls `fit(X, k)` and
+    `assign(X, centres)`
+      - `fit(X, k)` - finds centroid location for all of the `k`
+        clusters
+      - `assign(X, centres)` - assigns each example to a cluster
+4.  `show_clusters(X, centres)` - Visualize clusters according to 2d PCA
+    representation
+
+## Dependencies
+
+  - R 4.0.3
+
+## Usage
 
 ``` r
 library(kmeaningfulR)
-## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+| Task                               | Function                    |
+| ---------------------------------- | --------------------------- |
+| Scale numerical features           | `preprocess(df)`            |
+| Find list of centroid points       | `fit(df, 3)`                |
+| Assign new data point to cluster   | `assign(df, array2d)`       |
+| Find optimal number of cluster     | `fit_elbow(df)`             |
+| Visualize data coloured by cluster | `show_cluster(df, array2d)` |
 
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
+## Documentation
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
+The official documentation is hosted on Read the Docs:
+<https://kmeaningfulR.readthedocs.io/en/latest/>
 
-You can also embed plots, for example:
+## Contributors
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+This project was created by DSCI 524 Group 16:
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub\!
+  - Yihong (Hazel) Jiang
+  - Mike Lynch
+  - Trevor Kinsey
+  - Sasha Babicki
+
+We welcome and recognize all contributions. You can see a list of
+current contributors in the [contributors
+tab](https://github.com/UBC-MDS/kmeaningfulR/graphs/contributors).
