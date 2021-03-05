@@ -69,6 +69,7 @@ The official documentation is hosted on Read the Docs: https://kmeaningfulR.read
 
 ## Contributors
 This project was created by DSCI 524 Group 16: 
+
 - Yihong (Hazel) Jiang
 - Mike Lynch
 - Trevor Kinsey

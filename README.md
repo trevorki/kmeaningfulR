@@ -68,8 +68,12 @@ The official documentation is hosted on Read the Docs:
 
 ## Contributors
 
-This project was created by DSCI 524 Group 16: - Yihong (Hazel) Jiang -
-Mike Lynch - Trevor Kinsey - Sasha Babicki
+This project was created by DSCI 524 Group 16:
+
+  - Yihong (Hazel) Jiang
+  - Mike Lynch
+  - Trevor Kinsey
+  - Sasha Babicki
 
 We welcome and recognize all contributions. You can see a list of
 current contributors in the [contributors
