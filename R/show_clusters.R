@@ -18,4 +18,4 @@
 #' centers = rbind(c(0, 0), c(10, 10))
 show_clusters <- function(X, clusters, centroids = None){
 
-}# Insert code here
+}
