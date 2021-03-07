@@ -17,7 +17,7 @@ Authors@R:
       person(given = "Hazel",
              family = "Jiang",
              role = c("aut"),
-             email = ""))
+             email = "yihongj@student.ubc.ca"))
     
 Description: Uses the K-means algorithm to group similar data into clusters. Includes functions to preprocess and visualize the data.
 License: MIT + file LICENSE
