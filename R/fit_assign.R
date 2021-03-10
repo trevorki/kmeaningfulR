@@ -4,6 +4,39 @@
 # Module to find clusters in data using K-means
 #
 
+library(tidyverse)
+
+
+#' Makes clusters of n points in d dimensions
+#' @param n int Number of points
+#' @param k int Number of clusters
+#' @param d int Number of dimensions
+#'
+#' @return Dataframe of points
+#' @export
+#'
+#' @examples
+#' df = make_blobs(n, k, d)
+#'
+make_blobs <- function(n, k, d) {
+  blob_counts <- rep(0, k)                    #
+  for (nn in 1:n){                            # figure out how many points in each blob
+    blob_counts[nn%%k + 1] <- blob_counts[nn%%k + 1] + 1
+  }
+  centers = matrix(9*runif(k*d)+0.5 ,ncol=d)  # initialize random centers between 0.5 and 9.5 in each dimension
+  X = matrix(0, n, d)
+  start_index <- 0
+
+  for (kk in 1:k){                         # for every blob center
+    len <- blob_counts[kk]                 # number of points in current blob
+    for (l in 1:len){                      # for every point in this blob
+      X[start_index + l,] <- centers[kk,]  # set blob's points to center coordinates
+    }
+    start_index <- start_index + len       # point to start of next blob
+  }
+  X <- X + matrix(rep(rnorm(n*d,0,0.5)),n)  # add noise to centers
+  X
+}
 
 
 #' Chooses initial cluster locations using Kmeans++
@@ -103,4 +136,18 @@ fit_assign <- function(X, k){
 
 }
 
+
+
+n <- 100
+k <- 3
+d <- 2
+X = make_blobs(n, k, d)
+
+plot_blobs()
+
+X_df <- as.data.frame(X)
+ggplot(X_df, aes(x = V1, y = V2))+
+  geom_point() +
+  scale_x_continuous(limits = c(0,10),breaks = c(0,2,4,6,8,10)) +
+  scale_y_continuous(limits = c(0,10),breaks = c(0,2,4,6,8,10))
 
