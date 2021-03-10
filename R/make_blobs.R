@@ -3,7 +3,7 @@
 #' @param k int Number of clusters
 #' @param d int Number of dimensions
 #'
-#' @return Dataframe of points
+#' @return Matrix of points
 #' @export
 #'
 #' @examples
