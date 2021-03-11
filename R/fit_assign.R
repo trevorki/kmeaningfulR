@@ -3,41 +3,7 @@
 #
 # Module to find clusters in data using K-means
 #
-
 library(tidyverse)
-
-
-#' Makes clusters of n points in d dimensions
-#' @param n int Number of points
-#' @param k int Number of clusters
-#' @param d int Number of dimensions
-#'
-#' @return Dataframe of points
-#' @export
-#'
-#' @examples
-#' df = make_blobs(n, k, d)
-#'
-make_blobs <- function(n, k, d) {
-  blob_counts <- rep(0, k)                    #
-  for (nn in 1:n){                            # figure out how many points in each blob
-    blob_counts[nn%%k + 1] <- blob_counts[nn%%k + 1] + 1
-  }
-  centers = matrix(9*runif(k*d)+0.5 ,ncol=d)  # initialize random centers between 0.5 and 9.5 in each dimension
-  X = matrix(0, n, d)
-  start_index <- 0
-
-  for (kk in 1:k){                         # for every blob center
-    len <- blob_counts[kk]                 # number of points in current blob
-    for (l in 1:len){                      # for every point in this blob
-      X[start_index + l,] <- centers[kk,]  # set blob's points to center coordinates
-    }
-    start_index <- start_index + len       # point to start of next blob
-  }
-  X <- X + matrix(rep(rnorm(n*d,0,0.5)),n)  # add noise to centers
-  X
-}
-
 
 #' Chooses initial cluster locations using Kmeans++
 #'
@@ -51,23 +17,27 @@ make_blobs <- function(n, k, d) {
 #' X = rbind(c(0,0), c(1,1))
 #' init_centers(X, 2)
 init_centers <- function(X, k){
+  n <- dim(X)[1]
+  d <- dim(X)[2]
+  centers <- matrix(0, k, d)
+  ind <- list()
 
-}
+  # pick 1st center at random
+  ind <- append(ind, sample(1:n,1))
+  centers[1,] <- X[ind[[1]],]
 
-#' Assigns data points to k clusters
-#'
-#' @param X array Data points of dimension (n,d)
-#' @param centers array Coordinates of cluster centers, dimension (k,d)
-#'
-#' @return array Cluster assignments for each point in X, dimension (n,1)
-#' @export
-#'
-#' @examples
-#' X = rbind(c(0,0), c(1,1))
-#' centers = rbind(c(0.1, 0.1), c(1.1, 1.1))
-#' assign(X, centers)
-assign <- function(X, centers){
-
+  for (kk in 1:k) {      # for every center measure distance from every point
+    dists_sq <- measure_dist(X, matrix(centers[1:kk,], ncol = d))
+    for (i in ind){
+      dists_sq[i,] <- 10^10   # set distance between existing centers to very large
+    }
+    dists_sq <- apply(dists_sq, MARGIN = 1,FUN = min) # keep only the smallest distance for each point
+    dists_sq[dists_sq == 10^10] <- 0   # set distance between existing centers to zero
+    probs <- dists_sq / sum(dists_sq)
+    ind <- append(ind, sample(length(probs), 1, prob = probs))
+    centers[kk,] <- X[ind[[length(ind)]],]
+  }
+  centers
 }
 
 #' Measures distance from data points to cluster centers
@@ -83,8 +53,45 @@ assign <- function(X, centers){
 #' centers = rbind(c(0.1, 0.1), c(1.1, 1.1))
 #' measure_dist(X, centers)
 measure_dist <- function(X, centers){
+  k <- dim(centers)[1]
+  n <- dim(X)[1]
 
+  distances = matrix(0, n, k)
+  for (kk in 1:k){
+    for (nn in 1:n){
+      pt <- X[nn,]
+      cent <- centers[kk,]
+      distances[nn,kk] <- sqrt(sum((pt-cent)^2))
+    }
+  }
+  distances
 }
+
+
+
+#' Assigns data points to k clusters
+#'
+#' @param X array Data points of dimension (n,d)
+#' @param centers array Coordinates of cluster centers, dimension (k,d)
+#'
+#' @return array Cluster assignments for each point in X, dimension (n,1)
+#' @export
+#'
+#' @examples
+#' X = rbind(c(0,0), c(1,1))
+#' centers = rbind(c(0.1, 0.1), c(1.1, 1.1))
+#' assign(X, centers)
+assign <- function(X, centers){
+  n <- dim(X)[1]
+  k <- dim(centers)[1]
+  labels <- matrix(0,n,1)
+  distances <- measure_dist(X, centers)
+  for (nn in 1:n){
+    labels[nn] <- which.min(distances[nn,])
+  }
+  labels
+}
+
 
 
 #' Calculates center coordinates of each cluster
@@ -102,8 +109,26 @@ measure_dist <- function(X, centers){
 #' labels = c(1, 1, 2, 2)
 #' calc_centers(X, centers, labels)
 calc_centers <- function(X, centers, labels){
+  n <- dim(X)[1]
+  d <- dim(X)[2]
+  k <- dim(centers)[1]
 
+  new_centers <- matrix(0, k, d)
+  for (kk in 1:k){
+    # if the current center has points assigned to it take the mean of points
+    if (dim(matrix(X[labels == kk,], ncol = d))[1] > 1){
+      current_center <- matrix(apply(X[labels == kk,], MARGIN = 2,FUN = mean),
+                               ncol=d)
+      new_centers[kk,] <- current_center
+    }
+    else {    #set the new center to the point farthest from current center
+      dists <- measure_dist(X, matrix(centers[kk,], ncol = d))
+      new_centers[kk,] <- X[which.max(dists),]
+    }
+  }
+  new_centers
 }
+
 
 #' Finds k clusters in data points.
 #'
@@ -137,17 +162,30 @@ fit_assign <- function(X, k){
 }
 
 
-
+#############################################
 n <- 100
-k <- 3
+k <- 4
 d <- 2
-X = make_blobs(n, k, d)
 
-plot_blobs()
+# initialize
+X <- make_blobs(n, k, d)
+centers <- init_centers(X,k)
 
-X_df <- as.data.frame(X)
-ggplot(X_df, aes(x = V1, y = V2))+
-  geom_point() +
-  scale_x_continuous(limits = c(0,10),breaks = c(0,2,4,6,8,10)) +
-  scale_y_continuous(limits = c(0,10),breaks = c(0,2,4,6,8,10))
+#first iteration
+labels <- assign(X, centers)
+new_centers <- calc_centers(X,centers, labels)
+new_labels <- assign(X,centers)
 
+# plot_blobs(X,centers, labels, title = "Initialization")
+
+for (i in 1:20){
+  centers <- new_centers
+  lables <- new_labels
+  new_centers <- calc_centers(X,centers, labels)
+  new_labels <- assign(X, centers)
+  plot_blobs(X,centers, new_labels, title = i)
+  i <- i+1
+}
+
+centers = calc_centers(X,centers, new_labels)
+plot_blobs(X,centers, new_labels, title = "done?")

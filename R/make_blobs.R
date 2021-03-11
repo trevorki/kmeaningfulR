@@ -27,3 +27,28 @@ make_blobs <- function(n, k, d) {
   }
   X + matrix(rep(rnorm(n*d,0,0.5)),n)     # add noise to centers
 }
+
+
+#' Makes scatter plot of points in X
+#'
+#' @param X Array (2-dimensional) of points
+#' @param centers Array (2-dimensional) of cluster centers
+#'
+#' @return ggplot object
+#' @export
+#'
+#' @examples
+plot_blobs <- function(X,centers, labels, title = ""){
+  X_df <- as.data.frame(X)
+  X_df$cluster = as_factor(labels)
+  centers_df <- as.data.frame(centers)
+  centers_df$cluster = as_factor(1:dim(centers)[1])
+
+  X_plot <- ggplot() +
+    geom_point(data = X_df, aes(x = V1, y = V2, colour = cluster),
+               size = 4, alpha = 0.4) +
+    geom_point(data = centers_df, aes(x = V1, y = V2, colour = cluster),
+               size = 20, shape='*')
+    ggtitle(title)
+  X_plot
+}
