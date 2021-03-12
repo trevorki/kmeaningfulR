@@ -1,5 +1,8 @@
-# test_preprocess.R
+# author: Sasha Babicki
+# date: 2021-03-11
+#
 # Tests for preprocess.R
+#
 
 # empty dataframe, array, or matrix should throw exception
 expect_error(preprocess(data.frame()))
