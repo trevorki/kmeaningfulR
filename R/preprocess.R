@@ -4,9 +4,10 @@
 # Module to apply data preprocessing
 #
 
-#' This function takes in training data and applies some preprocessing steps such as scaling
+#' This function takes in training data and applies some preprocessing steps
+#' such as scaling and imputation
 #'
-#' @param X DataFrame Unprocessed data
+#' @param X Array-like (Dataframe, Matrix, Array) Unprocessed numeric data
 #'
 #' @return An array representing the data after appropriate preprocessing steps are applied
 #' @export
