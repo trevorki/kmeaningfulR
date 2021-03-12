@@ -21,6 +21,11 @@ preprocess <- function(X){
     stop("Please provide a dataframe X with at least one row as input")
   }
 
+  # Throw error for non numeric data
+  if(!any(sapply(X, is.numeric))){
+    stop("All data must be numeric")
+  }
+
   # Throw error if input is not array-like
   if(sum(dim(X)) < 2){
     stop("Input format does not have enough dimensions")
@@ -34,6 +39,7 @@ preprocess <- function(X){
     }
   )
 
+  # Throw error if all values are NAs
   if(all(is.na(X))){
     stop("Please provide at least one non-null value in each column")
   }
@@ -52,34 +58,8 @@ preprocess <- function(X){
     df <- (scaled_df-mean(scaled_df))/sd
   }
 
+  # remove attributes and return as array
   array(as.data.frame(df))
 
-
-#  # auto-detect feature type
-#  numeric_features = df.select_dtypes("number").columns
-#  categorical_features = df.select_dtypes("object").columns
-#
-#  # impute and scale numeric features
-#  numeric_transformer = make_pipeline(
-#    SimpleImputer(),
-#    StandardScaler()
-#  )
-#
-#  # use OHE for all other features
-#  categorical_transformer = make_pipeline(
-#    SimpleImputer(missing_values=[None, np.nan],
-#                  strategy="constant",
-#                  fill_value=""),
-#    OneHotEncoder(handle_unknown="ignore")
-#  )
-#
-#  preprocessor = make_column_transformer(
-#    (numeric_transformer, numeric_features),
-#    (categorical_transformer, categorical_features)
-#  )
-#
-#  X_processed = preprocessor.fit_transform(X)
-#
-#  return X_processed
 }
 
