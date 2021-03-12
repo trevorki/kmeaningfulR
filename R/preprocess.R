@@ -15,5 +15,50 @@
 #' X = data.frame(1, 2)
 #' preprocess(X)
 preprocess <- function(X){
+
   stop("error")
+
+#  # Throw error for empty dataframe, alternative is to return empty
+#  if len(X) < 1:
+#    raise Exception(
+#      "Please provide a dataframe X with at least one row as input"
+#    )
+#
+#  # Throw error if input is not array-like
+#  try:
+#    df = pd.DataFrame(X)
+#  except():
+#    raise Exception("Input format not accepted")
+#
+#  if sum(pd.isna(df).all()):
+#    raise Exception(
+#      "Please provide at least one non-null value in each column"
+#    )
+#
+#  # auto-detect feature type
+#  numeric_features = df.select_dtypes("number").columns
+#  categorical_features = df.select_dtypes("object").columns
+#
+#  # impute and scale numeric features
+#  numeric_transformer = make_pipeline(
+#    SimpleImputer(),
+#    StandardScaler()
+#  )
+#
+#  # use OHE for all other features
+#  categorical_transformer = make_pipeline(
+#    SimpleImputer(missing_values=[None, np.nan],
+#                  strategy="constant",
+#                  fill_value=""),
+#    OneHotEncoder(handle_unknown="ignore")
+#  )
+#
+#  preprocessor = make_column_transformer(
+#    (numeric_transformer, numeric_features),
+#    (categorical_transformer, categorical_features)
+#  )
+#
+#  X_processed = preprocessor.fit_transform(X)
+#
+#  return X_processed
 }
