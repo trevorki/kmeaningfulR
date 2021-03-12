@@ -15,5 +15,5 @@
 #' X = data.frame(1, 2)
 #' preprocess(X)
 preprocess <- function(X){
-
+  stop("error")
 }
