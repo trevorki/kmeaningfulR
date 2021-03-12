@@ -4,12 +4,42 @@
 # Module to optimize the choice of K in the K-means algorithm
 #
 
+
+#' avg_sil_score
+#' This function takes in a vector of cluster labels and a corresponding array of points and calculates the average silhouette score across all clusters.
+#' It returns the value of the average silhouette score.
+#'
+#' @param clusters A vector of cluster labels.
+#' @param X An (n_points x n_features) array of points.
+#'
+#' @return numeric: The average silhouette score.
+#' @export
+#'
+#' @examples
+#' 
+#' 
+#' helper_data <- array(c(c(0, 10, 10), c(0, 10, 11)), dim = c(3,2))
+#' helper_clusters <- c(1, 2, 2)
+#' avg_sil_score(helper_clusters, helper_data)
+avg_sil_score <- function(clusters, X) {
+  if (!(is.vector(clusters))){
+    stop("Input `clusters` should be a vector of numbers")
+  }
+  
+  if (!(is.numeric(clusters))){
+    stop("Input `clusters` should be a vector of numbers")
+  }
+  sil_scores <- silhouette(clusters, dist(X))
+  mean(sil_scores[, 3])
+}
+
+#' find_elbow
 #' This function takes in unlabeled, scaled data and performs clustering using the KMeans clustering algorithm values of K up to the min(10, n_samples - 1).
 #' It returns the value for K which maximizes the mean silhouette scores across all clusters.
 #'
-#' @param X An array of unlabeled data with appropriate preprocessing steps applied.
+#' @param X array: unlabeled data with appropriate preprocessing steps applied.
 #'
-#' @return An integer for the optimal choice of K in the K-means algorithm
+#' @return numeric: The optimal choice of K in the K-means algorithm according to silhouette score.
 #' @export
 #'
 #' @examples

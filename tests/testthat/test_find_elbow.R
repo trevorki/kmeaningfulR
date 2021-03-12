@@ -15,7 +15,7 @@ test_avg_sil_score <- function() {
   expect_true(is.numeric(avg_sil_score(clusters, helper_data)))
   
   # Make sure function gives the correct score on helper data
-  expect_true(all.equal.numeric(0.6207, avg_sil_score(clusters, helper_data), tolerance = 0.001))
+  expect_true(all.equal.numeric(0.6207, avg_sil_score(helper_clusters, helper_data), tolerance = 0.001))
 }
 
 test_avg_sil_score()
