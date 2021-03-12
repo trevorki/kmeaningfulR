@@ -35,13 +35,13 @@ expect_equal(preprocess(X), expected_output)
 #assert np.isnan(X).any()  # check that test code working
 #assert not np.isnan(preprocess(X)).any()  # result should not have nans
 #
-## handle missing data with imputation
-#X = [[None], [1]]
-#expected_output = np.array([[0., 0.]])  # fill with mean and then scale
-#assert (preprocess(X) == expected_output).all()
+# handle missing data with imputation
+X = data.frame(c(0, NA))
+expected_output = array(data.frame(c(0, 0))) # fill with mean and then scale
+expect_equal(preprocess(X), expected_output)
 
 # reject when all data missing
-X = data.frame(c(c(NULL, NULL), c(NULL, NULL)))
+X = data.frame(c(c(NA, NA), c(NA, NA)))
 expect_error(preprocess(X))
 
 ## use correct one-hot-encoding for categorical data

@@ -34,13 +34,17 @@ preprocess <- function(X){
     }
   )
 
-  if(any(is.na(X))){
+  if(all(is.na(X))){
     stop("Please provide at least one non-null value in each column")
   }
+
+  # impute numeric
+  df[] <- lapply(df, function(x) replace(x, is.na(x), mean(x, na.rm = TRUE)))
 
   # only scale if more than one element
   if(sum(dim(df)) > 2){
     scaled_df <- scale(df, scale=TRUE, center=FALSE)
+    scaled_df[is.na(scaled_df)] <- 0
     sd <- sd(scaled_df)
     if(sd == 0){
       sd <- 1
@@ -49,6 +53,7 @@ preprocess <- function(X){
   }
 
   array(as.data.frame(df))
+
 
 #  # auto-detect feature type
 #  numeric_features = df.select_dtypes("number").columns
