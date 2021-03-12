@@ -1,7 +1,7 @@
 # author: Mike Lynch
 # date: 2021-03-05
 #
-# Module to optimize the choice of K in the K-means algorithm
+# Module for optimizing the choice of K in the K-means algorithm
 #
 
 
@@ -16,8 +16,6 @@
 #' @export
 #'
 #' @examples
-#' 
-#' 
 #' helper_data <- array(c(c(0, 10, 10), c(0, 10, 11)), dim = c(3,2))
 #' helper_clusters <- c(1, 2, 2)
 #' avg_sil_score(helper_clusters, helper_data)
