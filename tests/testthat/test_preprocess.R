@@ -1,3 +1,56 @@
 # test_preprocess.R
+# Tests for preprocess.R
 
-expect_match(TRUE, TRUE)
+# empty dataframe, array, or matrix should throw exception
+expect_error(preprocess(data.frame()))
+expect_error(preprocess(array()))
+expect_error(preprocess(matrix(nrow=1, ncol = 1)))
+
+# non-array-like data should throw an exception
+expect_error(preprocess("string"))
+expect_error(preprocess(TRUE))
+
+## PYTHON TESTS
+## array with one col and one row 0 should be the same scaled or not
+#X <- data.frame([[0]])
+#expected_output = X
+#assert (expected_output == preprocess(X)).all()
+#
+## return type of processed data should be numpy.ndarray
+#assert type(preprocess(X)) is np.ndarray
+#
+## dataframe with two cols with same values should be [[0., 0.]]
+#X = pd.DataFrame({"col1": [1], "col2": [1]})
+#expected_output = np.array([[0., 0.]])
+#assert (preprocess(X) == expected_output).all()
+#
+## imputation is working as expected
+#X, _ = make_blobs(n_samples=10, centers=3, n_features=2)
+#mask = np.random.choice([True, False], size=X.shape)
+#X[mask] = None  # set entries as None at random
+#assert np.isnan(X).any()  # check that test code working
+#assert not np.isnan(preprocess(X)).any()  # result should not have nans
+#
+## handle missing data with imputation
+#X = [[None], [1]]
+#expected_output = np.array([[0., 0.]])  # fill with mean and then scale
+#assert (preprocess(X) == expected_output).all()
+#
+## reject when all data missing
+#X = [[None, None], [None, None]]
+#assert pytest.raises(Exception, preprocess, X)
+#
+## use correct one-hot-encoding for categorical data
+#X = [["neutral", "large"], ["neutral", "medium"]]
+#expected_output = np.array([[1., 1., 0.], [1., 0., 1.]])
+#assert (preprocess(X) == expected_output).all()
+#
+## use combination of scaling and OHE for combo data
+#X = [[2, "medium", "neutral"], [None, None, "neutral"]]
+#expected_output = np.array([[0., 0., 1., 1.], [0., 1., 0., 1.]])
+#assert (preprocess(X) == expected_output).all()
+#
+## possibly update in future to use
+## BOW encoding for other non-numeric data
+## e.g. length > 20 and no repeated words in col
+#
