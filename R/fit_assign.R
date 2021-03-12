@@ -3,7 +3,6 @@
 #
 # Module to find clusters in data using K-means
 #
-library(tidyverse)
 
 #' Chooses initial cluster locations using Kmeans++
 #'
@@ -17,6 +16,18 @@ library(tidyverse)
 #' X = rbind(c(0,0), c(1,1))
 #' init_centers(X, 2)
 init_centers <- function(X, k){
+
+  # Throw error if more centers than data points
+  if(dim(X)[1] <= k){
+    stop("There must be more data points than centers")
+  }
+  # Throw error if k f< 2
+  if(k < 2){
+    stop("There must be at least 2 clusters")
+  }
+
+
+
   n <- dim(X)[1]
   d <- dim(X)[2]
   centers <- matrix(0, k, d)
@@ -53,6 +64,12 @@ init_centers <- function(X, k){
 #' centers = rbind(c(0.1, 0.1), c(1.1, 1.1))
 #' measure_dist(X, centers)
 measure_dist <- function(X, centers){
+
+  # Throw error if more centers than data points
+  if(dim(X)[1] < dim(centers)[1]){
+    stop("There must be more data points than centers")
+  }
+
   k <- dim(centers)[1]
   n <- dim(X)[1]
 
@@ -82,6 +99,13 @@ measure_dist <- function(X, centers){
 #' centers = rbind(c(0.1, 0.1), c(1.1, 1.1))
 #' assign(X, centers)
 assign <- function(X, centers){
+
+  # Throw error if X and centers have different widths
+  if(dim(X)[2] < dim(centers)[2]){
+    stop("`X` and `centers` must have the same width")
+  }
+
+
   n <- dim(X)[1]
   k <- dim(centers)[1]
   labels <- matrix(0,n,1)
@@ -109,6 +133,17 @@ assign <- function(X, centers){
 #' labels = c(1, 1, 2, 2)
 #' calc_centers(X, centers, labels)
 calc_centers <- function(X, centers, labels){
+
+  # Throw error if `X` and `labels` have different lengths
+  if(dim(X)[1] != length(labels)){
+    stop("There must not the same number of labels as points")
+  }
+  # Throw error if X and centers have different widths
+  if(dim(X)[2] < dim(centers)[2]){
+    stop("`X` and `centers` must have the same width")
+  }
+
+
   n <- dim(X)[1]
   d <- dim(X)[2]
   k <- dim(centers)[1]
@@ -142,6 +177,24 @@ calc_centers <- function(X, centers, labels){
 #' X = rbind(c(0,0), c(1,1))
 #' fit(X, 2)
 fit <- function(X, k){
+
+  # Throw error if X contains missing values
+  if(any(is.na(X))){
+    stop("`X` contains missing values")
+  }
+  # Throw error if input is not array-like
+  if(sum(dim(X)) < 2){
+    stop("Input format does not have enough dimensions")
+  }
+  tryCatch(
+    expr = {
+      df <- as.data.frame(X)
+    },
+    error = function(e){
+      stop("Input format not accepted")
+    }
+  )
+
   centers <- init_centers(X, k)
 
   labels <- assign(X,centers)
@@ -172,6 +225,24 @@ fit <- function(X, k){
 #' X = rbind(c(0,0), c(1,1))
 #' fit_assign(X, 2)
 fit_assign <- function(X, k){
+
+  # Throw error if X contains missing values
+  if(any(is.na(X))){
+    stop("`X` contains missing values")
+  }
+  # Throw error if input is not array-like
+  if(sum(dim(X)) < 2){
+    stop("Input format does not have enough dimensions")
+  }
+  tryCatch(
+    expr = {
+      df <- as.data.frame(X)
+    },
+    error = function(e){
+      stop("Input format not accepted")
+    }
+  )
+
   centers = fit(X, k)
   labels = assign(X, centers)
   list(centers, labels)
