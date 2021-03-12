@@ -1,3 +1,5 @@
+library(tidyverse)
+
 #' Makes clusters of n points in d dimensions
 #' @param n int Number of points
 #' @param k int Number of clusters
@@ -38,7 +40,7 @@ make_blobs <- function(n, k, d) {
 #' @export
 #'
 #' @examples
-plot_blobs <- function(X,centers, labels, title = ""){
+plot_blobs <- function(X,centers, labels = none, title = ""){
   X_df <- as.data.frame(X)
   X_df$cluster = as_factor(labels)
   centers_df <- as.data.frame(centers)
@@ -48,7 +50,7 @@ plot_blobs <- function(X,centers, labels, title = ""){
     geom_point(data = X_df, aes(x = V1, y = V2, colour = cluster),
                size = 4, alpha = 0.4) +
     geom_point(data = centers_df, aes(x = V1, y = V2, colour = cluster),
-               size = 20, shape='*')
+               size = 20, shape='*')+
     ggtitle(title)
   X_plot
 }
