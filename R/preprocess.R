@@ -34,9 +34,16 @@ preprocess <- function(X){
     }
   )
 
-  if(is.na(X)){
+  if(any(is.na(X))){
     stop("Please provide at least one non-null value in each column")
   }
+
+  # only scale if more than one element
+  if(length(X) > 1){
+    scaled_df <- scale(df, scale=TRUE, center=FALSE)
+    df <- as.data.frame(scaled_df/mean(scaled_df))
+  }
+
   df
 
 #  # auto-detect feature type

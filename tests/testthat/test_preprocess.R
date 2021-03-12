@@ -16,11 +16,11 @@ expected_output <- X
 expect_equal(preprocess(X), expected_output)
 
 # return type of processed data should be dataframe
-expect_is(preprocess(X), "data.frame")
+expect_is(preprocess(X), c("data.frame", "matrix", "array"))
 
 # dataframe with two cols with same values should be [[0., 0.]]
-X <- data.frame(1, 1)
-expected_output <- data.frame(0, 0)
+X <- data.frame(c(1,1))
+expected_output <- data.frame(c(1, 1))
 expect_equal(preprocess(X), expected_output)
 
 ## imputation is working as expected
