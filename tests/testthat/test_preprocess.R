@@ -38,18 +38,18 @@ expected_output <- array(data.frame(c(0, 0)))
 expect_equal(preprocess(X), expected_output)
 
 ## imputation is working as expected
-#X = make_blobs(n_samples=10, centers=3, n_features=2)
-#mask = np.random.choice([True, False], size=X.shape)
-#X[mask] = None  # set entries as None at random
-#assert np.isnan(X).any()  # check that test code working
-#assert not np.isnan(preprocess(X)).any()  # result should not have nans
-#
+X <- make_blobs(10, 3, 5)
+X[9,3] <- NA  # set some random cells to NA
+X[1,2] <- NA
+expect_true(any(sapply(X, is.na)))  # check that test code working
+expect_false(any(sapply(preprocess(X), is.na)))  # result should not have nans
+
 # handle missing data with imputation
-X = data.frame(c(0, NA))
-expected_output = array(data.frame(c(0, 0))) # fill with mean and then scale
+X <- data.frame(c(0, NA))
+expected_output <- array(data.frame(c(0, 0))) # fill with mean and then scale
 expect_equal(preprocess(X), expected_output)
 
 # reject when all data missing
-X = data.frame(c(c(NA, NA), c(NA, NA)))
+X <- data.frame(c(c(NA, NA), c(NA, NA)))
 expect_error(preprocess(X))
 
