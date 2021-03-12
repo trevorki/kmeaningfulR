@@ -18,10 +18,11 @@ Authors@R:
              family = "Jiang",
              role = c("aut"),
              email = "yihongj@student.ubc.ca"))
-    
 Description: Uses the K-means algorithm to group similar data into clusters. Includes functions to preprocess and visualize the data.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Suggests: 
+    testthat

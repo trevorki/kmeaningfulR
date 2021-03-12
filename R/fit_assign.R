@@ -243,9 +243,3 @@ fit_assign <- function(X, k){
     }
   )
 
-  centers = fit(X, k)
-  labels = assign(X, centers)
-  list(centers, labels)
-}
-
-
