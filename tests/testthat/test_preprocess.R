@@ -10,19 +10,18 @@ expect_error(preprocess(matrix(nrow=1, ncol = 1)))
 expect_error(preprocess("string"))
 expect_error(preprocess(TRUE))
 
-## PYTHON TESTS
-## array with one col and one row 0 should be the same scaled or not
-#X <- data.frame([[0]])
-#expected_output = X
-#assert (expected_output == preprocess(X)).all()
-#
-## return type of processed data should be numpy.ndarray
-#assert type(preprocess(X)) is np.ndarray
+# array with one col and one row 0 should be the same scaled or not
+X <- data.frame(0)
+expected_output <- X
+expect_equal(preprocess(X), expected_output)
+
+# return type of processed data should be dataframe
+expect_is(preprocess(X), "data.frame")
 
 # dataframe with two cols with same values should be [[0., 0.]]
 X <- data.frame(1, 1)
 expected_output <- data.frame(0, 0)
-expect_equal(preprocess(X), X)
+expect_equal(preprocess(X), expected_output)
 
 ## imputation is working as expected
 #X = make_blobs(n_samples=10, centers=3, n_features=2)
