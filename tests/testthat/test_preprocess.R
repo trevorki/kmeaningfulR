@@ -12,15 +12,20 @@ expect_error(preprocess(TRUE))
 
 # array with one col and one row 0 should be the same scaled or not
 X <- data.frame(0)
-expected_output <- X
+expected_output <- array(X)
 expect_equal(preprocess(X), expected_output)
 
 # return type of processed data should be dataframe
 expect_is(preprocess(X), c("data.frame", "matrix", "array"))
 
-# dataframe with two cols with same values should be [[0., 0.]]
-X <- data.frame(c(1,1))
-expected_output <- data.frame(c(1, 1))
+# dataframe with two columns with same values should be [0, 0]
+X <- data.frame(1,1)
+expected_output <- array(data.frame(0, 0))
+expect_equal(preprocess(X), expected_output)
+
+# dataframe with two rows with same values should be [0, 0]
+X <- data.frame(c(2, 2))
+expected_output <- array(data.frame(c(0, 0)))
 expect_equal(preprocess(X), expected_output)
 
 ## imputation is working as expected

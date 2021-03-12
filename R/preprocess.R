@@ -39,12 +39,16 @@ preprocess <- function(X){
   }
 
   # only scale if more than one element
-  if(length(X) > 1){
+  if(sum(dim(df)) > 2){
     scaled_df <- scale(df, scale=TRUE, center=FALSE)
-    df <- as.data.frame(scaled_df/mean(scaled_df))
+    sd <- sd(scaled_df)
+    if(sd == 0){
+      sd <- 1
+    }
+    df <- (scaled_df-mean(scaled_df))/sd
   }
 
-  df
+  array(as.data.frame(df))
 
 #  # auto-detect feature type
 #  numeric_features = df.select_dtypes("number").columns
