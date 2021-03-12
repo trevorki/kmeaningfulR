@@ -2,18 +2,20 @@
 % Please edit documentation in R/preprocess.R
 \name{preprocess}
 \alias{preprocess}
-\title{This function takes in training data and applies some preprocessing steps such as scaling}
+\title{This function takes in training data and applies some preprocessing steps
+such as scaling and imputation}
 \usage{
 preprocess(X)
 }
 \arguments{
-\item{X}{DataFrame Unprocessed data}
+\item{X}{Array-like (Dataframe, Matrix, Array) Unprocessed numeric data}
 }
 \value{
 An array representing the data after appropriate preprocessing steps are applied
 }
 \description{
-This function takes in training data and applies some preprocessing steps such as scaling
+This function takes in training data and applies some preprocessing steps
+such as scaling and imputation
 }
 \examples{
 X = data.frame(1, 2)
