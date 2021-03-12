@@ -16,25 +16,28 @@
 #' preprocess(X)
 preprocess <- function(X){
 
-  stop("error")
+  # Throw error for empty dataframe, alternative is to return empty
+  if(length(X) < 1){
+    stop("Please provide a dataframe X with at least one row as input")
+  }
 
-#  # Throw error for empty dataframe, alternative is to return empty
-#  if len(X) < 1:
-#    raise Exception(
-#      "Please provide a dataframe X with at least one row as input"
-#    )
-#
-#  # Throw error if input is not array-like
-#  try:
-#    df = pd.DataFrame(X)
-#  except():
-#    raise Exception("Input format not accepted")
-#
-#  if sum(pd.isna(df).all()):
-#    raise Exception(
-#      "Please provide at least one non-null value in each column"
-#    )
-#
+  # Throw error if input is not array-like
+  if(sum(dim(X)) < 2){
+    stop("Input format does not have enough dimensions")
+  }
+  tryCatch(
+    expr = {
+      df <- as.data.frame(X)
+    },
+    error = function(e){
+      stop("Input format not accepted")
+    }
+  )
+
+  if(is.na(X)){
+    stop("Please provide at least one non-null value in each column")
+  }
+
 #  # auto-detect feature type
 #  numeric_features = df.select_dtypes("number").columns
 #  categorical_features = df.select_dtypes("object").columns
@@ -62,3 +65,5 @@ preprocess <- function(X){
 #
 #  return X_processed
 }
+print(dim(array()))
+
