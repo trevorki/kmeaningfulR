@@ -9,8 +9,8 @@
 #' This function takes in a vector of cluster labels and a corresponding array of points and calculates the average silhouette score across all clusters.
 #' It returns the value of the average silhouette score.
 #'
-#' @param clusters A vector of cluster labels.
-#' @param X An (n_points x n_features) array of points.
+#' @param clusters vector: A vector of cluster labels.
+#' @param X matrix: A (n_points x n_features) matrix of points.
 #'
 #' @return numeric: The average silhouette score.
 #' @export
@@ -23,9 +23,14 @@ avg_sil_score <- function(clusters, X) {
   if (!(is.vector(clusters))){
     stop("Input `clusters` should be a vector of numbers")
   }
-  
   if (!(is.numeric(clusters))){
     stop("Input `clusters` should be a vector of numbers")
+  }
+  if (!(is.matrix(X))){
+    stop("Input `X` should be a matrix of numbers")
+  }
+  if (!(is.numeric(X))){
+    stop("Input `X` should be a matrix of numbers")
   }
   sil_scores <- silhouette(clusters, dist(X))
   mean(sil_scores[, 3])
@@ -35,7 +40,7 @@ avg_sil_score <- function(clusters, X) {
 #' This function takes in unlabeled, scaled data and performs clustering using the KMeans clustering algorithm values of K up to the min(10, n_samples - 1).
 #' It returns the value for K which maximizes the mean silhouette scores across all clusters.
 #'
-#' @param X array: unlabeled data with appropriate preprocessing steps applied.
+#' @param X matrix: unlabeled data with appropriate preprocessing steps applied.
 #'
 #' @return numeric: The optimal choice of K in the K-means algorithm according to silhouette score.
 #' @export
