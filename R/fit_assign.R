@@ -143,7 +143,7 @@ k <- 3
 d <- 2
 X = make_blobs(n, k, d)
 
-plot_blobs()
+#plot_blobs()
 
 X_df <- as.data.frame(X)
 ggplot(X_df, aes(x = V1, y = V2))+
