@@ -26,7 +26,7 @@ init_centers <- function(X, k){
   ind <- append(ind, sample(1:n,1))
   centers[1,] <- X[ind[[1]],]
 
-  for (kk in 1:k) {      # for every center measure distance from every point
+  for (kk in 2:k) {      # for every center measure distance from every point
     dists_sq <- measure_dist(X, matrix(centers[1:kk,], ncol = d))
     for (i in ind){
       dists_sq[i,] <- 10^10   # set distance between existing centers to very large
@@ -142,7 +142,21 @@ calc_centers <- function(X, centers, labels){
 #' X = rbind(c(0,0), c(1,1))
 #' fit(X, 2)
 fit <- function(X, k){
+  centers <- init_centers(X, k)
 
+  labels <- assign(X,centers)
+  new_centers <- calc_centers(X, centers, labels)
+  new_labels <- assign(X, centers)
+
+  i <- 1
+  while(centers - new_centers && i < 30){
+    centers <- new_centers
+    labels <- new_labels
+    new_labels <- assign(X, centers) # assign cluster label based on closest center
+    new_centers <- calc_centers(X, centers, new_labels)
+    i <- i + 1
+  }
+  new_centers
 }
 
 #' Finds k clusters in data points and assigns each point to a cluster.
@@ -158,34 +172,9 @@ fit <- function(X, k){
 #' X = rbind(c(0,0), c(1,1))
 #' fit_assign(X, 2)
 fit_assign <- function(X, k){
-
+  centers = fit(X, k)
+  labels = assign(X, centers)
+  list(centers, labels)
 }
 
 
-#############################################
-n <- 100
-k <- 4
-d <- 2
-
-# initialize
-X <- make_blobs(n, k, d)
-centers <- init_centers(X,k)
-
-#first iteration
-labels <- assign(X, centers)
-new_centers <- calc_centers(X,centers, labels)
-new_labels <- assign(X,centers)
-
-# plot_blobs(X,centers, labels, title = "Initialization")
-
-for (i in 1:20){
-  centers <- new_centers
-  lables <- new_labels
-  new_centers <- calc_centers(X,centers, labels)
-  new_labels <- assign(X, centers)
-  plot_blobs(X,centers, new_labels, title = i)
-  i <- i+1
-}
-
-centers = calc_centers(X,centers, new_labels)
-plot_blobs(X,centers, new_labels, title = "done?")
