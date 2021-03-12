@@ -37,6 +37,7 @@ preprocess <- function(X){
   if(is.na(X)){
     stop("Please provide at least one non-null value in each column")
   }
+  df
 
 #  # auto-detect feature type
 #  numeric_features = df.select_dtypes("number").columns
@@ -65,5 +66,4 @@ preprocess <- function(X){
 #
 #  return X_processed
 }
-print(dim(array()))
 

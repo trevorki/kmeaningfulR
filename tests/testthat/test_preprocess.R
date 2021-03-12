@@ -18,14 +18,14 @@ expect_error(preprocess(TRUE))
 #
 ## return type of processed data should be numpy.ndarray
 #assert type(preprocess(X)) is np.ndarray
-#
-## dataframe with two cols with same values should be [[0., 0.]]
-#X = pd.DataFrame({"col1": [1], "col2": [1]})
-#expected_output = np.array([[0., 0.]])
-#assert (preprocess(X) == expected_output).all()
-#
+
+# dataframe with two cols with same values should be [[0., 0.]]
+X <- data.frame(1, 1)
+expected_output <- data.frame(0, 0)
+expect_equal(preprocess(X), X)
+
 ## imputation is working as expected
-#X, _ = make_blobs(n_samples=10, centers=3, n_features=2)
+#X = make_blobs(n_samples=10, centers=3, n_features=2)
 #mask = np.random.choice([True, False], size=X.shape)
 #X[mask] = None  # set entries as None at random
 #assert np.isnan(X).any()  # check that test code working
@@ -35,11 +35,11 @@ expect_error(preprocess(TRUE))
 #X = [[None], [1]]
 #expected_output = np.array([[0., 0.]])  # fill with mean and then scale
 #assert (preprocess(X) == expected_output).all()
-#
-## reject when all data missing
-#X = [[None, None], [None, None]]
-#assert pytest.raises(Exception, preprocess, X)
-#
+
+# reject when all data missing
+X = data.frame(c(c(NULL, NULL), c(NULL, NULL)))
+expect_error(preprocess(X))
+
 ## use correct one-hot-encoding for categorical data
 #X = [["neutral", "large"], ["neutral", "medium"]]
 #expected_output = np.array([[1., 1., 0.], [1., 0., 1.]])
