@@ -50,5 +50,5 @@ avg_sil_score <- function(clusters, X) {
 #' X_scaled <- preprocess(X)
 #' optimal_K <- find_elbow(X_scaled)
 find_elbow <- function(X){
-  
+
 }
