@@ -38,7 +38,7 @@ implementation from scratch.
 1.  `preprocess(X)` - Automatic dataset preprocessing: scales numerical
     features
 2.  `find_elbow(X)` - Automatic hyperparameter tuning to select optimal
-    number of clusters, `k`
+    number of clusters, `k`, according to silhouette score
 3.  `fit_assign(X, k)` - Wrapper function that calls `fit(X, k)` and
     `assign(X, centres)`
     -   `fit(X, k)` - finds centroid location for all of the `k`
@@ -50,11 +50,17 @@ implementation from scratch.
 ## Dependencies
 
 -   R 4.0.3
+-   cluster 2.1.1
 
 ## Usage
 
 ``` r
 library(kmeaningfulR)
+#> 
+#> Attaching package: 'kmeaningfulR'
+#> The following object is masked from 'package:base':
+#> 
+#>     assign
 ```
 
 | Task                               | Function                    |
@@ -62,7 +68,7 @@ library(kmeaningfulR)
 | Scale numerical features           | `preprocess(df)`            |
 | Find list of centroid points       | `fit(df, 3)`                |
 | Assign new data point to cluster   | `assign(df, array2d)`       |
-| Find optimal number of cluster     | `fit_elbow(df)`             |
+| Find optimal number of cluster     | `fit_elbow(X)`              |
 | Visualize data coloured by cluster | `show_cluster(df, array2d)` |
 
 ## Documentation
