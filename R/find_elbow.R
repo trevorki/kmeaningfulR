@@ -48,7 +48,7 @@ avg_sil_score <- function(labels, X) {
 #' @export
 #'
 #' @examples
-#' X <- array(c(c(0, 10, 10, 10, 10), c(0, 10, 11, 0, 1)), dim = c(5,2))
+#' X <- array(c(c(0, 1, 10, 10, 10, 10), c(0, 1, 10, 11, 0, 1)), dim = c(6,2))
 #' X_scaled <- preprocess(X)
 #' optimal_K <- find_elbow(X_scaled)
 find_elbow <- function(X) {
