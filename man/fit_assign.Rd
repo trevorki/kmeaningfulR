@@ -20,5 +20,5 @@ Finds k clusters in data points and assigns each point to a cluster.
 }
 \examples{
 X = rbind(c(0,0), c(1,1))
-fit_assign(X, 2)
+km <- fit_assign(X, 2)
 }
