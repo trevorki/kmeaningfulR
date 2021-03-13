@@ -2,23 +2,25 @@
 % Please edit documentation in R/find_elbow.R
 \name{find_elbow}
 \alias{find_elbow}
-\title{This function takes in unlabeled, scaled data and performs clustering using the KMeans clustering algorithm values of K up to the min(10, n_samples - 1).
+\title{find_elbow
+This function takes in unlabeled, scaled data and performs clustering using the KMeans clustering algorithm values of K up to the min(10, n_samples - 1).
 It returns the value for K which maximizes the mean silhouette scores across all clusters.}
 \usage{
 find_elbow(X)
 }
 \arguments{
-\item{X}{An array of unlabeled data with appropriate preprocessing steps applied.}
+\item{X}{matrix: unlabeled data with appropriate preprocessing steps applied.}
 }
 \value{
-An integer for the optimal choice of K in the K-means algorithm
+numeric: The optimal choice of K in the K-means algorithm according to silhouette score.
 }
 \description{
+find_elbow
 This function takes in unlabeled, scaled data and performs clustering using the KMeans clustering algorithm values of K up to the min(10, n_samples - 1).
 It returns the value for K which maximizes the mean silhouette scores across all clusters.
 }
 \examples{
-X <- data.frame(c(1, 3, 5), c(2, 4, 6))
+X <- array(c(c(0, 1, 10, 10, 10, 10), c(0, 1, 10, 11, 0, 1)), dim = c(6,2))
 X_scaled <- preprocess(X)
 optimal_K <- find_elbow(X_scaled)
 }
