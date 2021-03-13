@@ -19,20 +19,22 @@
 #' helper_data <- array(c(c(0, 10, 10), c(0, 10, 11)), dim = c(3,2))
 #' helper_clusters <- c(1, 2, 2)
 #' avg_sil_score(helper_clusters, helper_data)
-avg_sil_score <- function(clusters, X) {
-  if (!(is.vector(clusters))){
-    stop("Input `clusters` should be a vector of numbers")
+avg_sil_score <- function(labels, X) {
+  # verify input labels is of correct format
+  if (!(is.vector(labels))){
+    stop("Input `labels` should be a vector of numbers")
   }
-  if (!(is.numeric(clusters))){
-    stop("Input `clusters` should be a vector of numbers")
+  if (!(is.numeric(labels))){
+    stop("Input `labels` should be a vector of numbers")
   }
+  # verify input X is of correct format
   if (!(is.matrix(X))){
     stop("Input `X` should be a matrix of numbers")
   }
   if (!(is.numeric(X))){
     stop("Input `X` should be a matrix of numbers")
   }
-  sil_scores <- silhouette(clusters, dist(X))
+  sil_scores <- cluster::silhouette(labels, dist(X))
   mean(sil_scores[, 3])
 }
 
@@ -46,9 +48,27 @@ avg_sil_score <- function(clusters, X) {
 #' @export
 #'
 #' @examples
-#' X <- data.frame(c(1, 3, 5), c(2, 4, 6))
+#' X <- array(c(c(0, 10, 10, 10, 10), c(0, 10, 11, 0, 1)), dim = c(5,2))
 #' X_scaled <- preprocess(X)
 #' optimal_K <- find_elbow(X_scaled)
-find_elbow <- function(X){
-
+find_elbow <- function(X) {
+  # verify input X is of correct format
+  if (!(is.matrix(X))){
+    stop("Input `X` should be a matrix of numbers")
+  }
+  if (!(is.numeric(X))){
+    stop("Input `clusters` should be a matrix of numbers")
+  }
+  scores <- c()
+  K_max <- nrow(X)-1
+  for (k in 2:min(10, K_max)){
+    # call fit_assign to get vector of labels
+    # need to unlist to get labels as vector
+    labels <- unlist(fit_assign(X, k)[2])
+    score <- avg_sil_score(labels, X)
+    scores <- c(scores, score)
+  }
+  # use which.max to find index of greatest score
+  # add 1 since starting from 2
+  which.max(scores) + 1
 }
