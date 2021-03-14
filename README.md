@@ -17,11 +17,10 @@ preprocessing, hyperparameter tuning and visualizing clusters.
 
 ## Installation
 
-You can install the released version of kmeaningfulR from
-[CRAN](https://CRAN.R-project.org) with:
+You can install the released version of kmeaningfulR from github with
 
 ``` r
-install.packages("kmeaningfulR")
+install_github("UBC-MDS/kmeaningfulR")
 ```
 
 ## KmeaningfulR’s Place in the R Ecosystem
