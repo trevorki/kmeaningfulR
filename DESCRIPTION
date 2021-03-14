@@ -27,4 +27,8 @@ RoxygenNote: 7.1.1
 Suggests: 
     testthat
 Imports: 
-    cluster
+    cluster,
+    ggplot2,
+    FactoMineR,
+    forcats
+

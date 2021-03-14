@@ -51,16 +51,27 @@ implementation from scratch.
 
 -   R 4.0.3
 -   cluster 2.1.1
+-   FactoMineR
+-   forcats
+-   dplyr
 
 ## Usage
 
 ``` r
 library(kmeaningfulR)
-#> 
-#> Attaching package: 'kmeaningfulR'
-#> The following object is masked from 'package:base':
-#> 
-#>     assign
+
+# helper data X
+X  <- array(c(0, 1, 10, 10, 10, 10, 0, 1, 10, 11, 0, 1), dim = c(6,2))
+# scale data
+X_scaled <- preprocess(X)
+# find optimal number of clusters
+optimal_K <- find_elbow(X_scaled)
+# find location of cluster centers
+centers <- fit(X_scaled, optimal_K)
+# assign label of nearest center to every point
+labels <- assign(X_scaled,centers)
+# plot a 2D PCA visualisation of the points clusters
+show_clusters(X_scaled, labels, centers)
 ```
 
 | Task                               | Function                    |
@@ -70,6 +81,8 @@ library(kmeaningfulR)
 | Assign new data point to cluster   | `assign(df, array2d)`       |
 | Find optimal number of cluster     | `fit_elbow(X)`              |
 | Visualize data coloured by cluster | `show_cluster(df, array2d)` |
+
+![sample plot](sample_plot.png)
 
 ## Documentation
 
