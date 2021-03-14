@@ -61,6 +61,5 @@ preprocess <- function(X){
 
   # remove attributes and return as array
   as.matrix(as.data.frame(df))
-  # array(as.data.frame(df))
 }
 
