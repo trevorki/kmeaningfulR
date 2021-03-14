@@ -60,7 +60,7 @@ preprocess <- function(X){
   }
 
   # remove attributes and return as array
-  array(as.data.frame(df))
-
+  as.matrix(as.data.frame(df))
+  # array(as.data.frame(df))
 }
 

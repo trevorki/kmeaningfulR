@@ -29,4 +29,6 @@ Suggests:
 Imports: 
     cluster,
     ggplot2,
-    FactoMineR
+    FactoMineR,
+    forcats
+

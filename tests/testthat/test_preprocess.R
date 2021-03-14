@@ -29,16 +29,16 @@ expect_is(preprocess(X), c("data.frame", "matrix", "array"))
 
 # dataframe with two columns with same values should be [0, 0]
 X <- data.frame(1,1)
-expected_output <- as.matrix(data.frame(0, 0))
-expect_equal(preprocess(X), expected_output)
+expected_output <- array(data.frame(0, 0))
+expect_true(all(preprocess(X)==expected_output))
 
 # dataframe with two rows with same values should be [0, 0]
 X <- data.frame(c(2, 2))
-expected_output <- as.matrix(data.frame(c(0, 0)))
-expect_equal(preprocess(X), expected_output)
+expected_output <- array(data.frame(c(0, 0)))
+expect_true(all(preprocess(X) == expected_output))
 
 ## imputation is working as expected
-X <- make_blobs(10, 3, 5)
+X <- matrix(1,10,5)
 X[9,3] <- NA  # set some random cells to NA
 X[1,2] <- NA
 expect_true(any(sapply(X, is.na)))  # check that test code working
@@ -47,7 +47,7 @@ expect_false(any(sapply(preprocess(X), is.na)))  # result should not have nans
 # handle missing data with imputation
 X <- data.frame(c(0, NA))
 expected_output <- as.matrix(data.frame(c(0, 0))) # fill with mean and then scale
-expect_equal(preprocess(X), expected_output)
+expect_true(all(preprocess(X)==expected_output))
 
 # reject when all data missing
 X <- data.frame(c(c(NA, NA), c(NA, NA)))

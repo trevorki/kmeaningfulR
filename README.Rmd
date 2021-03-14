@@ -49,6 +49,8 @@ There already exist several packages that implement k-means clustering in R. Mos
 - R 4.0.3
 - cluster 2.1.1
 - FactoMineR
+- forcats
+- dplyr
 
 ## Usage
 
@@ -69,6 +71,8 @@ labels <- assign(X_scaled,centers)
 show_clusters(X_scaled, labels, centers)
 
 ```
+![](sample_plot.png)
+
 
 | Task | Function  |
 |------------|-----|

@@ -51,6 +51,9 @@ implementation from scratch.
 
 -   R 4.0.3
 -   cluster 2.1.1
+-   FactoMineR
+-   forcats
+-   dplyr
 
 ## Usage
 
@@ -78,6 +81,8 @@ show_clusters(X_scaled, labels, centers)
 | Assign new data point to cluster   | `assign(df, array2d)`       |
 | Find optimal number of cluster     | `fit_elbow(X)`              |
 | Visualize data coloured by cluster | `show_cluster(df, array2d)` |
+
+![sample plot](sample_plot.png)
 
 ## Documentation
 

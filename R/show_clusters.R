@@ -1,5 +1,7 @@
 library(FactoMineR)
-library(tidyverse)
+library(forcats)
+library(ggplot2)
+library(dplyr)
 
 # author: Hazel Jiang
 # date: 2021-03-06
@@ -46,7 +48,7 @@ show_clusters <- function(X, clusters, centroids){
   transformed_centroid$clusters = as.factor(1:dim(centroids)[1])
 
   plot <- ggplot() +
-    geom_point(data = transformed_X, aes(Dim.1, Dim.2, colour = clusters)，
+    geom_point(data = transformed_X, aes(Dim.1, Dim.2, colour = clusters),
                size = 1, alpha = 0.7) +
     geom_point(data = transformed_centroid, aes(Dim.1, Dim.2,
                                                 colour = clusters),
