@@ -21,7 +21,7 @@ expect_error(preprocess(data.frame("text", "data")))
 
 # array with one col and one row 0 should be the same scaled or not
 X <- data.frame(0)
-expected_output <- array(X)
+expected_output <- as.matrix(X)
 expect_equal(preprocess(X), expected_output)
 
 # return type of processed data should be dataframe
@@ -29,12 +29,12 @@ expect_is(preprocess(X), c("data.frame", "matrix", "array"))
 
 # dataframe with two columns with same values should be [0, 0]
 X <- data.frame(1,1)
-expected_output <- array(data.frame(0, 0))
+expected_output <- as.matrix(data.frame(0, 0))
 expect_equal(preprocess(X), expected_output)
 
 # dataframe with two rows with same values should be [0, 0]
 X <- data.frame(c(2, 2))
-expected_output <- array(data.frame(c(0, 0)))
+expected_output <- as.matrix(data.frame(c(0, 0)))
 expect_equal(preprocess(X), expected_output)
 
 ## imputation is working as expected
@@ -46,7 +46,7 @@ expect_false(any(sapply(preprocess(X), is.na)))  # result should not have nans
 
 # handle missing data with imputation
 X <- data.frame(c(0, NA))
-expected_output <- array(data.frame(c(0, 0))) # fill with mean and then scale
+expected_output <- as.matrix(data.frame(c(0, 0))) # fill with mean and then scale
 expect_equal(preprocess(X), expected_output)
 
 # reject when all data missing
