@@ -56,11 +56,19 @@ implementation from scratch.
 
 ``` r
 library(kmeaningfulR)
-#> 
-#> Attaching package: 'kmeaningfulR'
-#> The following object is masked from 'package:base':
-#> 
-#>     assign
+
+# helper data X
+X  <- array(c(0, 1, 10, 10, 10, 10, 0, 1, 10, 11, 0, 1), dim = c(6,2))
+# scale data
+X_scaled <- preprocess(X)
+# find optimal number of clusters
+optimal_K <- find_elbow(X_scaled)
+# find location of cluster centers
+centers <- fit(X_scaled, optimal_K)
+# assign label of nearest center to every point
+labels <- assign(X_scaled,centers)
+# plot a 2D PCA visualisation of the points clusters
+show_clusters(X_scaled, labels, centers)
 ```
 
 | Task                               | Function                    |
