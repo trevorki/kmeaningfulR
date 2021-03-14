@@ -2,24 +2,29 @@
 % Please edit documentation in R/show_clusters.R
 \name{show_clusters}
 \alias{show_clusters}
-\title{This functionreduces a data set to 2 dimensions using principle component analysis (PCA) and colours clusters of points.}
+\title{This function reduces a data set to 2 dimensions using principle component
+analysis (PCA) and colours clusters of points.}
 \usage{
-show_clusters(X, clusters, centroids = None)
+show_clusters(X, clusters, centroids)
 }
 \arguments{
-\item{X}{DataFrame Unprocessed data}
+\item{X}{array Data points of dimension (n,d)}
 
-\item{clusters}{vector corresponding cluster for X}
+\item{clusters}{array Cluster assignments for each point in X,
+dimension (n,1)}
 
-\item{centroids}{array Center coordinate for each cluster}
+\item{centroids}{array Coordinates of cluster centers, dimension (k,d)}
 }
 \value{
 plot A 2d principle components scatter plot coloured by cluster
 }
 \description{
-This functionreduces a data set to 2 dimensions using principle component analysis (PCA) and colours clusters of points.
+This function reduces a data set to 2 dimensions using principle component
+analysis (PCA) and colours clusters of points.
 }
 \examples{
- X = rbind(c(0,0), c(1,0), c(10,0), c(11,0))
+X = rbind(c(0,0), c(1,0), c(10,0), c(11,0))
 centers = rbind(c(0, 0), c(10, 10))
+labels <- c(1,1,1,1)
+show_clusters(X, labels,centers)
 }
