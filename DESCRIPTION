@@ -5,7 +5,7 @@ Authors@R:
     c(person(given = "Trevor",
              family = "Kinsey",
              role = c("aut", "cre"),
-             email = "trevor_kinsey@hotmail.com"),
+             email = "tkinsey@student.ubc.ca"),
       person(given = "Sasha",
              family = "Babicki",
              role = c("aut"),
@@ -13,7 +13,7 @@ Authors@R:
       person(given = "Mike",
              family = "Lynch",
              role = c("aut"),
-             email = "def fit_assign(X, k)"),
+             email = "mlynch@student.ubc.ca"),
       person(given = "Hazel",
              family = "Jiang",
              role = c("aut"),
@@ -25,10 +25,12 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests: 
-    testthat
+    testthat,
+    covr
 Imports: 
     cluster,
     ggplot2,
     FactoMineR,
     forcats
-
+URL: https://github.com/UBC-MDS/kmeaningfulR
+BugReports: https://github.com/UBC-MDS/kmeaningfulR/issues
