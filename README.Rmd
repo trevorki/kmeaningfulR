@@ -74,7 +74,7 @@ centers <- fit(X_scaled, optimal_K)
 labels <- assign(X_scaled,centers)
 
 # plot a 2D PCA visualisation of the points clusters
-show_clusters(X_scaled, labels, centers)
+# show_clusters(X_scaled, labels, centers)
 
 ```
 ![](sample_plot.png)

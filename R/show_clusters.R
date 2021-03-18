@@ -39,22 +39,22 @@ show_clusters <- function(X, clusters, centroids){
 
   row_x <- nrow(X)
   combine_df <- rbind(X, centroids)
-  pca = PCA(combine_df, scale.unit = TRUE, ncp = 2, graph = FALSE)
+  pca = FactoMineR::PCA(combine_df, scale.unit = TRUE, ncp = 2, graph = FALSE)
   transformed_data <- as.data.frame(pca$ind$coord)
   transformed_X <- transformed_data[1:row_x,]
-  transformed_centroid <- slice(transformed_data,
+  transformed_centroid <- dplyr::slice(transformed_data,
                                 (row_x+1):nrow(transformed_data))
   transformed_X$clusters = as.factor(clusters)
   transformed_centroid$clusters = as.factor(1:dim(centroids)[1])
 
-  plot <- ggplot() +
-    geom_point(data = transformed_X, aes(Dim.1, Dim.2, colour = clusters),
+  plot <- ggplot2::ggplot() +
+    ggplot2::geom_point(data = transformed_X, ggplot2::aes(Dim.1, Dim.2, colour = clusters),
                size = 1, alpha = 0.7) +
-    geom_point(data = transformed_centroid, aes(Dim.1, Dim.2,
+    ggplot2::geom_point(data = transformed_centroid, ggplot2::aes(Dim.1, Dim.2,
                                                 colour = clusters),
                size = 4, shape = 8) +
-    ggtitle('PCA Plot') +
-    theme_bw()
+    ggplot2::ggtitle('PCA Plot') +
+    ggplot2::theme_bw()
 
   plot
 }

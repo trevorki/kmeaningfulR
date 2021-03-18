@@ -188,7 +188,7 @@ fit <- function(X, k){
   new_labels <- assign(X, centers)
 
   i <- 1
-  while(centers - new_centers && i < 30){
+  while(all((centers - new_centers)==0) && i < 30){
     centers <- new_centers
     labels <- new_labels
     new_labels <- assign(X, centers) # assign cluster label to closest center

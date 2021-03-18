@@ -31,6 +31,7 @@ Imports:
     cluster,
     ggplot2,
     FactoMineR,
-    forcats
+    forcats,
+    dplyr
 URL: https://github.com/UBC-MDS/kmeaningfulR
 BugReports: https://github.com/UBC-MDS/kmeaningfulR/issues
