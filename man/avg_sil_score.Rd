@@ -9,9 +9,9 @@ It returns the value of the average silhouette score.}
 avg_sil_score(labels, X)
 }
 \arguments{
-\item{X}{matrix: A (n_points x n_features) matrix of points.}
+\item{labels}{vector: A vector of cluster labels.}
 
-\item{clusters}{vector: A vector of cluster labels.}
+\item{X}{matrix: A (n_points x n_features) matrix of points.}
 }
 \value{
 numeric: The average silhouette score.

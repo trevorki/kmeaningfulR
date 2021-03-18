@@ -9,7 +9,7 @@
 #' This function takes in a vector of cluster labels and a corresponding array of points and calculates the average silhouette score across all clusters.
 #' It returns the value of the average silhouette score.
 #'
-#' @param clusters vector: A vector of cluster labels.
+#' @param labels vector: A vector of cluster labels.
 #' @param X matrix: A (n_points x n_features) matrix of points.
 #'
 #' @return numeric: The average silhouette score.
@@ -34,7 +34,7 @@ avg_sil_score <- function(labels, X) {
   if (!(is.numeric(X))){
     stop("Input `X` should be a matrix of numbers")
   }
-  sil_scores <- cluster::silhouette(labels, dist(X))
+  sil_scores <- cluster::silhouette(labels, stats::dist(X))
   mean(sil_scores[, 3])
 }
 

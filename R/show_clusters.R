@@ -17,7 +17,7 @@ library(dplyr)
 #' dimension (n,1)
 #' @param centroids array Coordinates of cluster centers, dimension (k,d)
 #'
-#' @return plot A 2d principle components scatter plot coloured by cluster
+#' @return plot A 2d principal components scatter plot coloured by cluster
 #' @export
 #'
 #' @examples
@@ -48,9 +48,9 @@ show_clusters <- function(X, clusters, centroids){
   transformed_centroid$clusters = as.factor(1:dim(centroids)[1])
 
   plot <- ggplot2::ggplot() +
-    ggplot2::geom_point(data = transformed_X, ggplot2::aes(Dim.1, Dim.2, colour = clusters),
+    ggplot2::geom_point(data = transformed_X, ggplot2::aes(`Dim.1`, `Dim.2`, colour = clusters),
                size = 1, alpha = 0.7) +
-    ggplot2::geom_point(data = transformed_centroid, ggplot2::aes(Dim.1, Dim.2,
+    ggplot2::geom_point(data = transformed_centroid, ggplot2::aes(`Dim.1`, `Dim.2`,
                                                 colour = clusters),
                size = 4, shape = 8) +
     ggplot2::ggtitle('PCA Plot') +

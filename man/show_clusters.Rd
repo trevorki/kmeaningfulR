@@ -16,7 +16,7 @@ dimension (n,1)}
 \item{centroids}{array Coordinates of cluster centers, dimension (k,d)}
 }
 \value{
-plot A 2d principle components scatter plot coloured by cluster
+plot A 2d principal components scatter plot coloured by cluster
 }
 \description{
 This function reduces a data set to 2 dimensions using principle component
