@@ -7,13 +7,12 @@
 fit_assign(X, k)
 }
 \arguments{
-\item{X}{array Data points of dimension (n,d)}
+\item{X}{array: Data points of dimension (n,d)}
 
-\item{k}{int The number of desired clusters}
+\item{k}{int: The number of desired clusters}
 }
 \value{
-list \link{1}: array of cluster centers, dimension(n,d)
-\link{2}: array of cluster labels, dimension (n,1)
+list: array of cluster centers dimension(n,d), array of cluster labels dimension (n,1)
 }
 \description{
 Finds k clusters in data points and assigns each point to a cluster.

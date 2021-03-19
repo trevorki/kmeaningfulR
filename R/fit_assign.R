@@ -200,11 +200,10 @@ fit <- function(X, k){
 
 #' Finds k clusters in data points and assigns each point to a cluster.
 #'
-#' @param X array Data points of dimension (n,d)
-#' @param k int The number of desired clusters
+#' @param X array: Data points of dimension (n,d)
+#' @param k int: The number of desired clusters
 #'
-#' @return list [1]: array of cluster centers, dimension(n,d)
-#'              [2]: array of cluster labels, dimension (n,1)
+#' @return list: array of cluster centers dimension(n,d), array of cluster labels dimension (n,1)
 #' @export
 #'
 #' @examples
